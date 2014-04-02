@@ -140,18 +140,22 @@ public class MainActivity extends Activity {
             
             if ( position == 1 ) /* menu item "Browsen" */
             {
-            	// ListView navigatie SQL/queries
-            	
+            	// Database inlezen.
+            	// ListView gebruiken om uitdraai van query in weer te geven.
+            	// Nieuwe query uitvoeren op basis van geklikt item uit ListView.
             }
             
             if ( position == 2 ) /* menu item "Favorieten" */
             {
             	// gebruik maken van "arrayFavorieten"
+            	// ListView gebruiken om array te vullen met de favorieten.
             }
             
             if ( position == 3 ) /* menu item "Verversen" */
             {
             	// get-statement om tabel van server te halen
+            	// deze functie kan nog geschrapt worden. afhankelijk wat gunnar te weten komt
+            	// over de connectiviteit tussen app en server tijdens het navigeren.
 //            	dbHelper.onUpgrade( db, dbHelper.DATABASE_VERSION, dbHelper.DATABASE_VERSION ++);
             }
             
@@ -159,7 +163,7 @@ public class MainActivity extends Activity {
             {
             	// Mocht deze optie niet gebruikt worden in de app
             	// dan dient menu item "Afsluiten" hier voor aangepast
-            	// te worden ( position == 5 -> position == 4 )
+            	// te worden ( position == ? )
             }
         
             if ( position == 5 ) /* menu item "Afsluiten" */
