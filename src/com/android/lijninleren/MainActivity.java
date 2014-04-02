@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//Testing Joost 123
+
 package com.android.lijninleren;
 
 import java.util.Locale;
@@ -134,6 +134,8 @@ public class MainActivity extends Activity {
             if ( position == 0 ) /* menu item "Zoeken" */
             {
             	// search code https://developer.android.com/training/search/search.html
+            	// de zoekmachine die nu in de app zit verbind door naar google/zoekt op internet.
+            	// dat moeten we niet hebben, we willen een zoekfunctie die intern zoekt
             }
             
             if ( position == 1 ) /* menu item "Browsen" */
