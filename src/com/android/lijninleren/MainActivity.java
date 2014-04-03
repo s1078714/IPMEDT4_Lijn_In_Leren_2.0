@@ -145,8 +145,9 @@ public class MainActivity extends Activity {
             	// Database inlezen.
             	// ListView gebruiken om uitdraai van query in weer te geven.
             	// Nieuwe query uitvoeren op basis van geklikt item uit ListView.
-            	Intent i = new Intent(getApplicationContext(), AllItemsActivity.class);
+            	Intent i = new Intent(MainActivity.this, AllItemsActivity.class);
                 startActivity(i);
+                
                 String message = "U klikte op Browsen!";
             	Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
