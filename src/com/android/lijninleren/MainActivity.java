@@ -48,8 +48,8 @@ public class MainActivity extends Activity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
-    
-    private MySQLiteHelper dbHelper;
+   
+    private AllItemsActivity allItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +136,8 @@ public class MainActivity extends Activity {
             	// search code https://developer.android.com/training/search/search.html
             	// de zoekmachine die nu in de app zit verbind door naar google/zoekt op internet.
             	// dat moeten we niet hebben, we willen een zoekfunctie die intern zoekt
+            	String message = "U klikte op " + getActionBar().getTitle() + "!";
+            	Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
             
             if ( position == 1 ) /* menu item "Browsen" */
@@ -143,6 +145,10 @@ public class MainActivity extends Activity {
             	// Database inlezen.
             	// ListView gebruiken om uitdraai van query in weer te geven.
             	// Nieuwe query uitvoeren op basis van geklikt item uit ListView.
+            	Intent i = new Intent(getApplicationContext(), AllItemsActivity.class);
+                startActivity(i);
+                String message = "U klikte op Browsen!";
+            	Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
             
             if ( position == 2 ) /* menu item "Favorieten" */

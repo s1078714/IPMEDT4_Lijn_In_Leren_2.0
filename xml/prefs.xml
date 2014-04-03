@@ -3,7 +3,7 @@
     
     <ListPreference 
         android:title="list"
-        android:key=""
+        android:key="list"
         android:entries="@array/list"/>
     
 

@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- All Items Activity -->
+        <activity
+            android:name=".AllItemsActivity"
+            android:label="All Items" >
+        </activity>
     </application>
 
 </manifest>

@@ -34,12 +34,12 @@ public class AllItemsActivity extends ListActivity
 	ArrayList<HashMap<String, String>> itemsList;
 
 	// url to get all products list
-	private static String url_all_items = "http://145.97.16.200/android_connect/get_all_products.php";
+	private static String url_all_items = "http://145.97.16.200/~s1078714/android_connect/get_all_items.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
-	private static final String TAG_PRODUCTS = "items";
-	private static final String TAG_PID = "id";
+	private static final String TAG_ITEMS = "items";
+	private static final String TAG_IID = "iid";
 	private static final String TAG_NAME = "name";
 
 	// products JSONArray
@@ -67,14 +67,14 @@ public class AllItemsActivity extends ListActivity
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// getting values from selected ListItem
-				String iid = ((TextView) view.findViewById(R.id.id)).getText()
+				String iid = ((TextView) view.findViewById(R.id.iid)).getText()
 						.toString();
 
 				//					// Starting new intent
 				//					Intent in = new Intent(getApplicationContext(),
 				////							EditProductActivity.class);
-				//					// sending pid to next activity
-				//					in.putExtra(TAG_PID, iid);
+				//					// sending iid to next activity
+				//					in.putExtra(TAG_IID, iid);
 				//					
 				//					// starting new activity and expecting some response back
 				//					startActivityForResult(in, 100);
@@ -122,21 +122,21 @@ public class AllItemsActivity extends ListActivity
 				if (success == 1) {
 					// products found
 					// Getting Array of Products
-					items = json.getJSONArray(TAG_PRODUCTS);
+					items = json.getJSONArray(TAG_ITEMS);
 
 					// looping through All Products
 					for (int i = 0; i < items.length(); i++) {
 						JSONObject c = items.getJSONObject(i);
 
 						// Storing each json item in variable
-						String id = c.getString(TAG_PID);
+						String id = c.getString(TAG_IID);
 						String name = c.getString(TAG_NAME);
 
 						// creating new HashMap
 						HashMap<String, String> map = new HashMap<String, String>();
 
 						// adding each child node to HashMap key => value
-						map.put(TAG_PID, id);
+						map.put(TAG_IID, id);
 						map.put(TAG_NAME, name);
 
 						// adding HashList to ArrayList
@@ -172,9 +172,9 @@ public class AllItemsActivity extends ListActivity
 					 * */
 					ListAdapter adapter = new SimpleAdapter(
 							AllItemsActivity.this, itemsList,
-							R.layout.drawer_list_item, new String[] { TAG_PID,
+							R.layout.drawer_list_item, new String[] { TAG_IID,
 									TAG_NAME},
-									new int[] { R.id.id, R.id.name });
+									new int[] { R.id.iid, R.id.name });
 					// updating listview
 					setListAdapter(adapter);
 				}
