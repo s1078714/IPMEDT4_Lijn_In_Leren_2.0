@@ -1,16 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Lijn In Leren</string>
+
     <string-array name="menu_array">
         <item>Zoeken</item>
         <item>Browsen</item>
         <item>Favorieten</item>
-        <item>Verversen</item>
         <item>Instellingen</item>
         <item>Afsluiten</item>
     </string-array>
+    <string-array name="fragment_array">
+        <item>com.android.lijninleren.FragmentZoeken</item>
+        <item>com.android.lijninleren.FragmentBrowsen</item>
+        <item>com.android.lijninleren.FragmentFavorieten</item>
+        <item>com.android.lijninleren.FragmentInstellingen</item>
+    </string-array>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="action_websearch">Web search</string>
-    <string name="app_not_available">Sorry, there\'s no web browser available</string>
-    <string name="imageDescription">content omschrijving, plaaaaaatje</string>
+
 </resources>
