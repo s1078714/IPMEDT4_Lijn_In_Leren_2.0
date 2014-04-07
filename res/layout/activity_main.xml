@@ -18,4 +18,11 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:background="#111"/>
+    
+    <ListFragment
+        android:id="@+id/listfragment"
+        android:name="com.android.lijninleren.AllItemsFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        />
 </android.support.v4.widget.DrawerLayout>

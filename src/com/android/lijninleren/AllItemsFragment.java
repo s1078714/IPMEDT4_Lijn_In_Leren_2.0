@@ -9,13 +9,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -23,7 +24,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class AllItemsActivity extends ListActivity 
+public class AllItemsFragment extends ListFragment 
 {
 	// Progress Dialog
 	private ProgressDialog pDialog;
@@ -34,27 +35,34 @@ public class AllItemsActivity extends ListActivity
 	ArrayList<HashMap<String, String>> itemsList;
 
 	// url to get all products list
-	private static String url_all_items = "http://145.101.80.210:80/android_connect/get_all_products.php";
+	private static String url_all_items = "http://192.168.2.5:80/android_connect/get_all_products.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
 	private static final String TAG_ITEMS = "items";
-	private static final String TAG_IID = "iid";
+	private static final String TAG_IID = "id";
 	private static final String TAG_NAME = "name";
+	
 
 	// products JSONArray
 	JSONArray items = null;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.all_items);
+	public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState )
+	{
+		return inflater.inflate( R.id.listfragment, container, false );
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+
 
 		// Hashmap for ListView
 		itemsList = new ArrayList<HashMap<String, String>>();
 
 		// Loading products in Background Thread
-		new LoadAllProducts().execute();
+		new LoadAllItems().execute();
 
 		// Get listview
 		ListView lv = getListView();
@@ -88,7 +96,7 @@ public class AllItemsActivity extends ListActivity
 	/**
 	 * Background Async Task to Load all items by making HTTP Request
 	 * */
-	class LoadAllProducts extends AsyncTask<String, String, String> {
+	class LoadAllItems extends AsyncTask<String, String, String> {
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -96,8 +104,9 @@ public class AllItemsActivity extends ListActivity
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(AllItemsActivity.this);
-			pDialog.setMessage("Loading products. Please wait...");
+			pDialog = ProgressDialog.show(getActivity(), "Loading...", "Please wait...", true);
+//			pDialog = new ProgressDialog(AllItemsActivity.this);
+			pDialog.setMessage("Items laden. Een ogenblik geduld...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(false);
 			pDialog.show();
@@ -165,13 +174,13 @@ public class AllItemsActivity extends ListActivity
 			// dismiss the dialog after getting all products
 			pDialog.dismiss();
 			// updating UI from Background Thread
-			runOnUiThread(new Runnable() {
+			getActivity().runOnUiThread(new Runnable() {
 				public void run() {
 					/**
 					 * Updating parsed JSON data into ListView
 					 * */
 					ListAdapter adapter = new SimpleAdapter(
-							AllItemsActivity.this, itemsList,
+							getActivity(), itemsList,
 							R.layout.drawer_list_item, new String[] { TAG_IID,
 									TAG_NAME},
 									new int[] { R.id.iid, R.id.name });
