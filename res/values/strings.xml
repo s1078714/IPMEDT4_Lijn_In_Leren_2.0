@@ -11,10 +11,10 @@
         <item>Afsluiten</item>
     </string-array>
     <string-array name="fragment_array">
-        <item>com.example.navigationdrawer.FragmentZoeken</item>
-        <item>com.example.navigationdrawer.FragmentBrowsen</item>
-        <item>com.example.navigationdrawer.FragmentFavorieten</item>
-        <item>com.example.navigationdrawer.FragmentInstellingen</item>
+        <item>com.android.lijninleren.FragmentZoeken</item>
+        <item>com.android.lijninleren.FragmentBrowsen</item>
+        <item>com.android.lijninleren.FragmentFavorieten</item>
+        <item>com.android.lijninleren.FragmentInstellingen</item>
     </string-array>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
