@@ -44,7 +44,7 @@ public class FragmentBrowsen extends ListFragment {
 	ArrayList<HashMap<String, String>> itemsList = new ArrayList<HashMap<String, String>>();
 
 	// url to get all products list
-	private static String url_all_products = MainActivity.url + "android_connect/get_all_products.php";
+	private static String url_all_products = MainActivity.url + "www/android_connect/get_all_products.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";

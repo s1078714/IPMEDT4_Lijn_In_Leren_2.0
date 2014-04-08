@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
-	static String url = "http://192.168.2.5:80/";
+	static String url = "http://lijninleren.hostoi.com:80/";
 
 	private String[] data;
 	private String[] fragments;
