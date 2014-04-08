@@ -48,17 +48,10 @@ public class MainActivity extends FragmentActivity {
 				{
 					finish();
 				}
-//				drawer.setDrawerListener( new DrawerLayout.SimpleDrawerListener(){
-//					@Override
-//					public void onDrawerClosed(View drawerView){
-//						super.onDrawerClosed(drawerView);
 						getActionBar().setTitle(mTitle);
 						FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
 						tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[pos]));
-//						System.out.println("Drawer is gesloten2222! mTitle = " + mTitle );
 						tx.commit();
-//					}
-//				});
 				drawer.closeDrawer(navList);
 			}
 		});
@@ -74,13 +67,8 @@ public class MainActivity extends FragmentActivity {
 				R.string.drawer_close  /* "close drawer" description for accessibility */
 				) {
 			public void onDrawerClosed(View view) {
-//				getActionBar().setTitle(mTitle);
 				super.onDrawerClosed(view);
-//				getActionBar().setTitle(mTitle);
-//				FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-//				tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[pos]));
 				System.out.println("Drawer is gesloten2222! mTitle = " + mTitle );
-//				tx.commit();
 				System.out.println("Drawer is gesloten!");
 				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
