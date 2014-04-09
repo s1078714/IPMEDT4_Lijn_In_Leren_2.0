@@ -14,7 +14,7 @@ import android.widget.SimpleAdapter;
 
 public class Favorites extends Activity
 {
-	List<Map<String,String>> planetsList = new ArrayList<Map<String,String>>();
+	List<Map<String,String>> favoriteslist = new ArrayList<Map<String,String>>();
 
 	
 	@Override
@@ -26,22 +26,22 @@ public class Favorites extends Activity
 		initList();
 		
 		ListView lv = (ListView) findViewById(R.id.listView);
-		SimpleAdapter simpleAdpt = new SimpleAdapter(this, planetsList, android.R.layout.simple_list_item_1, new String[] {"planet"}, new int[] {android.R.id.text1});
+		SimpleAdapter simpleAdpt = new SimpleAdapter(this, favoriteslist, android.R.layout.simple_list_item_1, new String[] {"planet"}, new int[] {android.R.id.text1});
 		
 		lv.setAdapter(simpleAdpt);
 	}
 		
 	private void initList()
 		{
-			planetsList.add(createPlanet("planet", "Mercury"));
-			planetsList.add(createPlanet("planet", "Jupiter"));
+			favoriteslist.add(createFavorite("planet", "Mercury"));
+			favoriteslist.add(createFavorite("planet", "Jupiter"));
 		}
 		
-	private HashMap<String, String> createPlanet(String key, String name)
+	private HashMap<String, String> createFavorite(String key, String name)
 	{
-		HashMap<String, String> planet = new HashMap<String, String>();
-		planet.put(key,name);
-		return planet;
+		HashMap<String, String> favorite = new HashMap<String, String>();
+		favorite.put(key,name);
+		return favorite;
 	}
 	
 	
