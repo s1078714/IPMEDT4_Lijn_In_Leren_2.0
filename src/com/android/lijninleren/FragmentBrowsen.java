@@ -101,7 +101,7 @@ public class FragmentBrowsen extends ListFragment {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			pDialog = new ProgressDialog( getActivity() );
-			pDialog.setMessage("Loading products. Please wait...");
+			pDialog.setMessage("Gegevens laden. Een moment geduld...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.show();
@@ -119,7 +119,7 @@ public class FragmentBrowsen extends ListFragment {
 				// getting JSON string from URL
 				JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
 				// Check your log cat for JSON reponse
-				Log.d("All Products: ", json.toString());
+				Log.d("Alle gegevens: ", json.toString());
 
 				try {
 					// Checking for SUCCESS TAG
