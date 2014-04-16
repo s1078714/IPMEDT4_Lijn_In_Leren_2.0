@@ -8,9 +8,10 @@
         <item>Instellingen</item>
         <item>Afsluiten</item>
     </string-array>
+      <string name="search_hint">Type hier uw zoekopdracht</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="action_websearch">Web search</string>
+    <string name="action_websearch"> search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="imageDescription">content omschrijving, plaaaaaatje</string>
 </resources>

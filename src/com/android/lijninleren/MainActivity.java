@@ -22,11 +22,13 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,6 +40,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -111,20 +114,14 @@ public class MainActivity extends Activity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        switch(item.getItemId()) {
-        case R.id.action_websearch:
-            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-            intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-            }
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+       
+       
+        Intent i = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(i);
+		return false;
+      
     }
+
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -136,6 +133,8 @@ public class MainActivity extends Activity {
             	// search code https://developer.android.com/training/search/search.html
             	// de zoekmachine die nu in de app zit verbind door naar google/zoekt op internet.
             	// dat moeten we niet hebben, we willen een zoekfunctie die intern zoekt
+            	Intent i = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(i);
             	String message = "U klikte op " + getActionBar().getTitle() + "!";
             	Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
