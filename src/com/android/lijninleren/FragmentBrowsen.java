@@ -115,8 +115,7 @@ public class FragmentBrowsen extends ListFragment {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// getting values from selected ListItem
 				itemClicked = ((TextView) view.findViewById(R.id.leerlijn)).getText()
 						.toString();
@@ -452,7 +451,7 @@ public class FragmentBrowsen extends ListFragment {
 				public void run() {
 					Log.d("run()", "Zoeken naar passende adapter");
 					
-					textViewLeraar = ((TextView) getActivity().findViewById(R.id.informatie_leraar));
+//					textViewLeraar = ((TextView) getActivity().findViewById(R.id.informatie_leraar));
 //					textViewLeraar.setVisibility( TextView.GONE );
 
 					/**

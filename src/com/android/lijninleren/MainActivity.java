@@ -40,6 +40,7 @@ public class MainActivity extends FragmentActivity {
 		final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		final ListView navList = (ListView) findViewById(R.id.drawer);
 		navList.setAdapter(adapter);
+				
 		navList.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, final int pos,long id){
@@ -58,6 +59,10 @@ public class MainActivity extends FragmentActivity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
+		/**
+		 * Deactiveert icon in ActionBar
+		 */
+		getActionBar().setDisplayShowHomeEnabled(false);
 
 		mDrawerToggle = new ActionBarDrawerToggle(
 				this,                  /* host Activity */
