@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:onClick="" >
 
     <!-- Product id (pid) - will be HIDDEN - used to pass to other activity -->
     <TextView
@@ -14,12 +15,13 @@
 
     <!-- Name Label -->
     <TextView
-        android:id="@+id/leerlijn"
+        android:id="@+id/informatie_kind"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dip"
-        android:textSize="17dip"
-        android:textStyle="bold" />
+        android:textSize="15dip"
+        android:textStyle="normal"
+        android:clickable="false" />
    <!--  
     <TextView 
         android:id="@+id/vak"
@@ -60,14 +62,36 @@
         android:padding="10dip"
         android:textSize="17dip"
         android:textStyle="bold" />
-    
+ -->   
     <TextView 
         android:id="@+id/informatie_leraar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="17dip"
-        android:textStyle="bold"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingBottom="0dip"
+        android:paddingTop="35dip"
+        android:textSize="15dip"
+        android:textStyle="normal"
+        android:clickable="false"
          />
--->
+    
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingBottom="0dip"
+        android:paddingTop="35dip"
+        android:textSize="12dip"
+        android:text="Kerndoel" />
+    
+    <TextView 
+        android:id="@+id/kerndoel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textSize="12dip"
+        android:textStyle="italic" />
+
 </LinearLayout>

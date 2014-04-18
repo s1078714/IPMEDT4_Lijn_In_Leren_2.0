@@ -69,13 +69,14 @@ public class FragmentBrowsen extends ListFragment {
 	String Select  = "leerlijn";
 	String GroupBy = Select;
 	String Where  = "WHERE leerlijn = leerlijn";
-	
+
 	// SQL statement storage values
 	String WhereLeerlijn;
 	String WhereVak;
 	String WhereOnderdeel;
 	String WhereGroep;
-	
+
+	TextView textViewLeraar;
 
 	String id;
 	String leerlijn;
@@ -83,6 +84,8 @@ public class FragmentBrowsen extends ListFragment {
 	String onderdeel;
 	String kerndoel;
 	String groep;
+	String informatie_kind;
+	String informatie_leraar;
 
 	// url to get all products list
 	private static String url_all_products = MainActivity.url + "www/android_connect/get_all_items.php?table=" + TAG_PRODUCTS;
@@ -117,19 +120,62 @@ public class FragmentBrowsen extends ListFragment {
 				// getting values from selected ListItem
 				itemClicked = ((TextView) view.findViewById(R.id.leerlijn)).getText()
 						.toString();
-//				leerlijn = itemClicked;
+				Log.d("laatste check itemClicked", itemClicked );
+				if ( WhereLeerlijn == null )
+				{
+					leerlijn = itemClicked;
+					Log.d("WhereLeerlijn", "== null");
+				}
+				else
+				{
+					leerlijn = WhereLeerlijn;
+					if ( WhereVak == null )
+					{
+						vak = itemClicked;
+						Log.d("WhereVak", "== null");
+					}
+					else
+					{
+						vak = WhereVak;
+						if ( WhereOnderdeel == null )
+						{
+							onderdeel = itemClicked;
+							Log.d("WhereOnderdeel", "== null");
+						}
+						else
+						{
+							onderdeel = WhereOnderdeel;
+							if ( WhereGroep == null )
+							{
+								groep = itemClicked;
+								Log.d("WhereGroep", "== null");
+							}
+							else
+							{
+								groep = WhereGroep;
+							}
+						}
+					}
+				}
+
 				Log.d("leerlijn", leerlijn );
+				Log.d("vak", vak );
+				Log.d("onderdeel", onderdeel );
+				Log.d("groep", groep );
+				
+				
 
 				if ( itemClicked == leerlijn /*leerlijn || itemClicked == "Kunstzinnige orientatie" || itemClicked == "Ontwikkelingspsychologie" || itemClicked == "Orientatie op jezelf en de wereld" || itemClicked == "Rekenen" || itemClicked == "Sociaal en communicatief gedrag" || itemClicked == "Taal onderwijs" */)
 				{
 					Log.d("if itemClicked statement leerlijn", "Gestart");
 					Log.d("Toont", "vakken");
 					Select = "vak";
-					Where = "WHERE leerlijn = '" + itemClicked + "'";
+					Where = "WHERE leerlijn = '" + leerlijn + "'";
 					Log.d( "Where", Where );
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereLeerlijn = itemClicked;
-//					vak = itemClicked;
+					//					vak = itemClicked;
+					new LoadAllItems().execute();
 				}
 
 				if ( itemClicked == vak )
@@ -141,21 +187,62 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d( "Where", Where );
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereVak = itemClicked;
-					onderdeel = itemClicked;
+					//					onderdeel = itemClicked;
+					new LoadAllItems().execute();
+
 				}
-				
+				if (vak == "null")
+				{
+					Log.d("List", "LIJST IS LEEG!!!!");
+					Toast.makeText(getActivity().getBaseContext(), "Lijst is leeg!!!", Toast.LENGTH_LONG).show();
+
+					// doorswitchen naar onderdeel
+				}
+
 				if ( itemClicked == onderdeel )
 				{
-					Log.d("if itemClicked statement vak", "Gestart");
+					Log.d("if itemClicked statement onderdeel", "Gestart");
 					Log.d("Toont", "groepen");
 					Select = "groep";
-					Where = "WHERE leerlijn = '" + WhereLeerlijn + "' AND vak = '" + WhereVak + "'";
+					Where = "WHERE leerlijn = '" + WhereLeerlijn + "' AND vak = '" + WhereVak + "' AND onderdeel = '" + itemClicked + "'";
 					Log.d( "Where", Where );
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereOnderdeel = itemClicked;
-					kerndoel = itemClicked;
+					new LoadAllItems().execute();
 				}
-				new LoadAllItems().execute();
+
+				if ( itemClicked == groep )
+				{
+					Log.d("if itemClicked statement groep", "Gestart");
+					Log.d("Toont", "informatie");
+					Select = " ";
+					Where = "WHERE leerlijn = '" + WhereLeerlijn + "' AND vak = '" + WhereVak + "' AND onderdeel = '" + WhereOnderdeel + "' AND groep = '" + itemClicked + "'";
+					Log.d( "Where", Where );
+					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
+					WhereGroep = itemClicked;
+					new LoadAllItems().execute();
+				}
+
+				if (itemClicked == informatie_kind )
+				{
+					Log.d("Geklikt op", informatie_kind);
+					Log.d("== statement", "GESTART");
+				}
+//				if (itemClicked == TAG_INFORMATIE_KIND)
+//				{
+//					Toast.makeText(getActivity().getBaseContext(), "U klikte op informatie", Toast.LENGTH_LONG).show();
+//				}
+
+				Log.d("Query", "SELECT " + Select + " FROM " + TAG_PRODUCTS + " " + Where + " GROUP BY " + GroupBy);
+
+				Log.d("itemClicked", itemClicked );
+				Log.d("informatie_kind", informatie_kind );
+
+				if (itemClicked != informatie_kind )
+				{
+					Log.d("!= statement", "GESTART");
+				}
+
 				// itemsList leegmaken om append te voorkomen
 				itemsList.clear();
 				Log.d("Item clicked: ", itemClicked);
@@ -168,7 +255,8 @@ public class FragmentBrowsen extends ListFragment {
 	/**
 	 * Background Async Task to Load all product by making HTTP Request
 	 * */
-	class LoadAllItems extends AsyncTask<String, String, String> {
+	class LoadAllItems extends AsyncTask<String, String, String> 
+	{
 
 		/**
 		 * Before starting background thread Show Progress Dialog
@@ -195,7 +283,10 @@ public class FragmentBrowsen extends ListFragment {
 				Log.d("GetText()", "GESTART!");
 				// Get user defined values
 				//				Select  = "leerlijn";
-				GroupBy = Select;
+				if ( itemClicked != groep )
+				{
+					GroupBy = Select;
+				}
 				//				Where  = "leerlijn";
 				//				Where2  = "="; // pass.getText().toString()
 				//				Where3  = "leerlijn"; // pass.getText().toString()
@@ -300,8 +391,8 @@ public class FragmentBrowsen extends ListFragment {
 							onderdeel = c.getString(TAG_ONDERDEEL);
 							kerndoel = c.getString(TAG_KERNDOEL);
 							groep = c.getString(TAG_GROEP);
-							String informatie_kind = c.getString(TAG_INFORMATIE_KIND);
-							String informatie_leraar = c.getString(TAG_INFORMATIE_LERAAR);
+							informatie_kind = c.getString(TAG_INFORMATIE_KIND);
+							informatie_leraar = c.getString(TAG_INFORMATIE_LERAAR);
 
 							Log.d("For-loop", "getStrings zijn uitgevoerd! Loop i = " + i);
 
@@ -359,6 +450,11 @@ public class FragmentBrowsen extends ListFragment {
 			// updating UI from Background Thread
 			getActivity().runOnUiThread(new Runnable() {
 				public void run() {
+					Log.d("run()", "Zoeken naar passende adapter");
+					
+					textViewLeraar = ((TextView) getActivity().findViewById(R.id.informatie_leraar));
+//					textViewLeraar.setVisibility( TextView.GONE );
+
 					/**
 					 * Updating parsed JSON data into ListView
 					 * */
@@ -377,8 +473,10 @@ public class FragmentBrowsen extends ListFragment {
 						// updating listview
 						setListAdapter(adapter);
 					}
+
 					if (vak != "null")
 					{
+						Log.d("Listadapter", "TAG_VAK" );
 						adapter = new SimpleAdapter(
 
 								getActivity(), itemsList,
@@ -402,9 +500,12 @@ public class FragmentBrowsen extends ListFragment {
 						// updating listview
 						setListAdapter(adapter);
 					}
-					if (groep != "null")
+					if (groep != "null" && id == "null" /*&& informatie_kind == "null"*/)
 					{
-						Log.d("Listadapter", "TAG_groep" );
+						Log.d("TAG_GROEP, informatie_kind =", informatie_kind );
+						Log.d("TAG_GROEP, pid/id =", id );
+						
+						Log.d("Listadapter", "TAG_GROEP" );
 						adapter = new SimpleAdapter(
 
 								getActivity(), itemsList,
@@ -414,21 +515,45 @@ public class FragmentBrowsen extends ListFragment {
 						// updating listview
 						setListAdapter(adapter);
 					}
-					
-//					else
-//					{
-//
-//						adapter = new SimpleAdapter(
-//								getActivity(), itemsList,
-//								/* AANPASSEN VOOR LISTVIEW */							R.layout.list_item, new String[] { TAG_PID, TAG_LEERLIJN
-//									/*TAG_PID, TAG_LEERLIJN, TAG_VAK, TAG_ONDERDEEL, TAG_KERNDOEL, TAG_GROEP, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR*/
-//								},
-//								new int[] { R.id.pid, R.id.leerlijn/*, R.id.vak, R.id.onderdeel, R.id.kerndoel, R.id.groep, R.id.informatie_kind, R.id.informatie_leraar */ /* MOETEN ER HIER NOG MEER ID'S?? */ });
-//						Log.d("else statement list adapter, itemClicked", "" + itemClicked);
-//						Log.d("else statement list adapter, leerlijn", "" + leerlijn);
-//						// updating listview
-//						setListAdapter(adapter);
-//					}
+					if (informatie_kind != "null" && id != "null")
+					{
+//						textViewLeraar.setVisibility( TextView.GONE );
+						
+						
+						
+						String TAG_INFORMATIE = informatie_kind + "\n" + informatie_leraar;
+
+						Log.d("informatie_kind : inhoud", informatie_kind );
+						Log.d("informatie_leraar : inhoud", informatie_leraar );
+						Log.d("kerndoel : inhoud", "kerndoel" + kerndoel );
+						Log.d("TAG_INFORMATIE : inhoud", TAG_INFORMATIE );
+
+						Log.d("Listadapter", "TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR" );
+						adapter = new SimpleAdapter(
+
+								getActivity(), itemsList,
+								/* AANPASSEN VOOR LISTVIEW */
+								R.layout.list_item_informatie, new String[] { TAG_PID, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR, TAG_KERNDOEL },
+								new int[] { R.id.pid, R.id.informatie_kind, R.id.informatie_leraar, R.id.kerndoel });
+						// updating listview
+						setListAdapter(adapter);
+					}
+
+
+					//					else
+					//					{
+					//
+					//						adapter = new SimpleAdapter(
+					//								getActivity(), itemsList,
+					//								/* AANPASSEN VOOR LISTVIEW */							R.layout.list_item, new String[] { TAG_PID, TAG_LEERLIJN
+					//									/*TAG_PID, TAG_LEERLIJN, TAG_VAK, TAG_ONDERDEEL, TAG_KERNDOEL, TAG_GROEP, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR*/
+					//								},
+					//								new int[] { R.id.pid, R.id.leerlijn/*, R.id.vak, R.id.onderdeel, R.id.kerndoel, R.id.groep, R.id.informatie_kind, R.id.informatie_leraar */ /* MOETEN ER HIER NOG MEER ID'S?? */ });
+					//						Log.d("else statement list adapter, itemClicked", "" + itemClicked);
+					//						Log.d("else statement list adapter, leerlijn", "" + leerlijn);
+					//						// updating listview
+					//						setListAdapter(adapter);
+					//					}
 					Log.d("itemsList", itemsList.toString());
 				}
 			});
