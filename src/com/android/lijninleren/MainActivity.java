@@ -1,22 +1,29 @@
 package com.android.lijninleren;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
 	static String url = "http://lijninleren.hostoi.com:80/";
+	
+	CheckBox checkBoxFav;
 
 	private String[] data;
 	private String[] fragments;
@@ -27,6 +34,13 @@ public class MainActivity extends FragmentActivity {
 	private CharSequence mTitle;
 	
 	@Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        FragmentBrowsen.onBackPressed();
+    }
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -36,11 +50,11 @@ public class MainActivity extends FragmentActivity {
 		fragments = getResources().getStringArray(R.array.fragment_array);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActionBar().getThemedContext(), android.R.layout.simple_list_item_1, data);
-		
+
 		final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		final ListView navList = (ListView) findViewById(R.id.drawer);
 		navList.setAdapter(adapter);
-				
+
 		navList.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, final int pos,long id){
@@ -49,10 +63,10 @@ public class MainActivity extends FragmentActivity {
 				{
 					finish();
 				}
-						getActionBar().setTitle(mTitle);
-						FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-						tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[pos]));
-						tx.commit();
+				getActionBar().setTitle(mTitle);
+				FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+				tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[pos]));
+				tx.commit();
 				drawer.closeDrawer(navList);
 			}
 		});
@@ -87,9 +101,24 @@ public class MainActivity extends FragmentActivity {
 		drawer.setDrawerListener(mDrawerToggle);
 
 		FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-		tx.replace(R.id.main,Fragment.instantiate(MainActivity.this, fragments[0]));
+		tx.replace(R.id.main,Fragment.instantiate(MainActivity.this, fragments[2]));
 		tx.commit();
+
+		
 	}
+
+	//	@Override
+	//	public boolean onCreateOptionsMenu(Menu menu) {
+	//	    MenuInflater inflater = getMenuInflater();
+	//	    inflater.inflate(R.menu.main, menu);
+	//	    
+	//	    return true;
+	//	}
+
+	
+
+
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

@@ -18,14 +18,18 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -76,7 +80,10 @@ public class FragmentBrowsen extends ListFragment {
 	String WhereOnderdeel;
 	String WhereGroep;
 
-	TextView textViewLeraar;
+	// Favorieten functionaliteit
+	SharedPreferences favorieten;
+	String favString;
+	
 
 	String id;
 	String leerlijn;
@@ -96,21 +103,104 @@ public class FragmentBrowsen extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_browsen, null);
+		
+		// Favorieten inladen
+//		favorieten = getActivity().getPreferences( 0 );
 
 		return root;
 
 	}
+	
+//	@Override
+//	public boolean onKey(View v, int keyCode, KeyEvent event) {
+//		// TODO Auto-generated method stub
+//		if( keyCode == KeyEvent.KEYCODE_BACK ){
+//			
+//			{
+//				Log.d("if itemClicked statement onderdeel", "Gestart");
+//				Log.d("Toont", "groepen");
+//				Select = "groep";
+//				Where = "WHERE leerlijn = '" + WhereLeerlijn + "' AND vak = '" + WhereVak + "' AND onderdeel = '" + itemClicked + "'";
+//				Log.d( "Where", Where );
+//				Log.d( "itemClicked (doInBackground)", "" + itemClicked );
+//				WhereOnderdeel = itemClicked;
+//				new LoadAllItems().execute();
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
+	
+	public static void onBackPressed()
+    {
+        //Pop Fragments off backstack and do your other checks
+		Log.d("onBackPressed()", "PRESSED!");
+		
+    }
+	
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		// Loading products in Background Thread
 		new LoadAllItems().execute();
-
+		
+		final DatabaseHandler db = new DatabaseHandler(getActivity());
+		
 		// Get listview
 		ListView lv = getListView();
+		
+		lv.setOnKeyListener( new View.OnKeyListener()
+		{
+		    @Override
+		    public boolean onKey( View v, int keyCode, KeyEvent event )
+		    {
+		        if( keyCode == KeyEvent.KEYCODE_BACK )
+		        {
+					Log.d("KEYCODE_BACK", "PRESSED!");
+					Log.d("Toont", "groepen");
+					Select = "groep";
+					Where = "WHERE leerlijn = '" + WhereLeerlijn + "' AND vak = '" + WhereVak + "' AND onderdeel = '" + itemClicked + "'";
+					Log.d( "Where", Where );
+					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
+					WhereOnderdeel = itemClicked;
+					new LoadAllItems().execute();
+					return true; 
+				} 
+				return false; 
+			} 
+		});
+		
 
-		// on seleting single product
+		final Button buttonFav = (Button) getView().findViewById(R.id.favorietButton);
+		buttonFav.setVisibility( View.GONE );
+		Log.d("buttonFav", "Visibility View.GONE" );
+		
+				
+		buttonFav.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+					System.out.println("Checked");
+					Log.d("id", id );
+					
+					Log.d("Insert: ", "Inserting ..");
+					
+					db.addFavoriet(new Favoriet(id, favString));
+					
+					Toast.makeText(getActivity(), "Favoriet opgeslagen", Toast.LENGTH_LONG).show();
+					// Reading all favorites
+			        Log.d("Reading: ", "Reading all favorites.."); 
+			        List<Favoriet> favorites = db.getAllFavorites();       
+			         
+			        for (Favoriet fav : favorites) {
+			            String log = "Id: "+fav.getID()+" ,Name: " + fav.getTitel();
+			                // Writing Contacts to log
+			        Log.d("Name: ", log);
+			        }
+		    }
+		});
+
+		// on selecting single product
 		// launching Edit Product Screen
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -156,6 +246,11 @@ public class FragmentBrowsen extends ListFragment {
 						}
 					}
 				}
+				
+				favString = groep + ", " + onderdeel + ", " + leerlijn;
+				Log.d("favString", favString );
+				
+				
 
 				Log.d("leerlijn", leerlijn );
 				Log.d("vak", vak );
@@ -190,14 +285,7 @@ public class FragmentBrowsen extends ListFragment {
 					new LoadAllItems().execute();
 
 				}
-				if (vak == "null")
-				{
-					Log.d("List", "LIJST IS LEEG!!!!");
-					Toast.makeText(getActivity().getBaseContext(), "Lijst is leeg!!!", Toast.LENGTH_LONG).show();
-
-					// doorswitchen naar onderdeel
-				}
-
+				
 				if ( itemClicked == onderdeel )
 				{
 					Log.d("if itemClicked statement onderdeel", "Gestart");
@@ -220,8 +308,14 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereGroep = itemClicked;
 					new LoadAllItems().execute();
+					if (TAG_INFORMATIE_KIND != "null")
+					{
+						buttonFav.setVisibility( View.VISIBLE );
+						Log.d("buttonFav", "Visibility View.VISIBLE" );
+					}
+					
 				}
-
+				
 				if (itemClicked == informatie_kind )
 				{
 					Log.d("Geklikt op", informatie_kind);
@@ -247,8 +341,38 @@ public class FragmentBrowsen extends ListFragment {
 				Log.d("Item clicked: ", itemClicked);
 			}
 		});
-	}
+		
+		
 
+		
+		
+	}
+	
+//	private void loadSavedPreferences() {
+//		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//		boolean checkBoxValue = sharedPreferences.getBoolean("CheckBox_Value", false);
+//		String name = sharedPreferences.getString("storedName", "YourName");
+//		if (checkBoxValue) {
+//			checkBoxFav.setChecked(true);
+//		} else {
+//			checkBoxFav.setChecked(false);
+//		}
+//		editText.setText(name);
+//	}
+//	private void savePreferences(String key, boolean value) {
+//		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//		Editor editor = sharedPreferences.edit();
+//		editor.putBoolean(key, value);
+//		editor.commit();
+//	}
+//	private void savePreferences(String key, String value) {
+//		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//		Editor editor = sharedPreferences.edit();
+//		editor.putString(key, value);
+//		editor.commit();
+//	}
+	
+	
 
 
 	/**
@@ -451,9 +575,6 @@ public class FragmentBrowsen extends ListFragment {
 				public void run() {
 					Log.d("run()", "Zoeken naar passende adapter");
 					
-//					textViewLeraar = ((TextView) getActivity().findViewById(R.id.informatie_leraar));
-//					textViewLeraar.setVisibility( TextView.GONE );
-
 					/**
 					 * Updating parsed JSON data into ListView
 					 * */
@@ -463,12 +584,11 @@ public class FragmentBrowsen extends ListFragment {
 						Log.d("Listadapter", "TAG_LEERLIJN" );
 						adapter = new SimpleAdapter(
 
-								getActivity(), itemsList,
-								/* AANPASSEN VOOR LISTVIEW */
-								R.layout.list_item, new String[] { TAG_PID, TAG_LEERLIJN
-									/*TAG_PID, TAG_LEERLIJN, TAG_VAK, TAG_ONDERDEEL, TAG_KERNDOEL, TAG_GROEP, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR*/
-								},
-								new int[] { R.id.pid, R.id.leerlijn/*, R.id.vak, R.id.onderdeel, R.id.kerndoel, R.id.groep, R.id.informatie_kind, R.id.informatie_leraar */ /* MOETEN ER HIER NOG MEER ID'S?? */ });
+								getActivity(),
+								itemsList,
+								R.layout.list_item,
+								new String[] { TAG_PID, TAG_LEERLIJN },
+								new int[] { R.id.pid, R.id.leerlijn });
 						// updating listview
 						setListAdapter(adapter);
 					}
@@ -478,12 +598,11 @@ public class FragmentBrowsen extends ListFragment {
 						Log.d("Listadapter", "TAG_VAK" );
 						adapter = new SimpleAdapter(
 
-								getActivity(), itemsList,
-								/* AANPASSEN VOOR LISTVIEW */
-								R.layout.list_item, new String[] { TAG_PID, TAG_VAK
-									/*TAG_PID, TAG_LEERLIJN, TAG_VAK, TAG_ONDERDEEL, TAG_KERNDOEL, TAG_GROEP, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR*/
-								},
-								new int[] { R.id.pid, R.id.leerlijn/*, R.id.vak, R.id.onderdeel, R.id.kerndoel, R.id.groep, R.id.informatie_kind, R.id.informatie_leraar */ /* MOETEN ER HIER NOG MEER ID'S?? */ });
+								getActivity(),
+								itemsList,
+								R.layout.list_item,
+								new String[] { TAG_PID, TAG_VAK },
+								new int[] { R.id.pid, R.id.leerlijn });
 						// updating listview
 						setListAdapter(adapter);
 					}
@@ -492,14 +611,15 @@ public class FragmentBrowsen extends ListFragment {
 						Log.d("Listadapter", "TAG_ONDERDEEL" );
 						adapter = new SimpleAdapter(
 
-								getActivity(), itemsList,
-								/* AANPASSEN VOOR LISTVIEW */
-								R.layout.list_item, new String[] { TAG_PID, TAG_ONDERDEEL },
+								getActivity(),
+								itemsList,
+								R.layout.list_item,
+								new String[] { TAG_PID, TAG_ONDERDEEL },
 								new int[] { R.id.pid, R.id.leerlijn });
 						// updating listview
 						setListAdapter(adapter);
 					}
-					if (groep != "null" && id == "null" /*&& informatie_kind == "null"*/)
+					if (groep != "null" && id == "null")
 					{
 						Log.d("TAG_GROEP, informatie_kind =", informatie_kind );
 						Log.d("TAG_GROEP, pid/id =", id );
@@ -507,19 +627,16 @@ public class FragmentBrowsen extends ListFragment {
 						Log.d("Listadapter", "TAG_GROEP" );
 						adapter = new SimpleAdapter(
 
-								getActivity(), itemsList,
-								/* AANPASSEN VOOR LISTVIEW */
-								R.layout.list_item, new String[] { TAG_PID, TAG_GROEP },
+								getActivity(),
+								itemsList,
+								R.layout.list_item,
+								new String[] { TAG_PID, TAG_GROEP },
 								new int[] { R.id.pid, R.id.leerlijn });
 						// updating listview
 						setListAdapter(adapter);
 					}
 					if (informatie_kind != "null" && id != "null")
 					{
-//						textViewLeraar.setVisibility( TextView.GONE );
-						
-						
-						
 						String TAG_INFORMATIE = informatie_kind + "\n" + informatie_leraar;
 
 						Log.d("informatie_kind : inhoud", informatie_kind );
@@ -530,29 +647,15 @@ public class FragmentBrowsen extends ListFragment {
 						Log.d("Listadapter", "TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR" );
 						adapter = new SimpleAdapter(
 
-								getActivity(), itemsList,
-								/* AANPASSEN VOOR LISTVIEW */
-								R.layout.list_item_informatie, new String[] { TAG_PID, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR, TAG_KERNDOEL },
+								getActivity(),
+								itemsList,
+								R.layout.list_item_informatie,
+								new String[] { TAG_PID, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR, TAG_KERNDOEL },
 								new int[] { R.id.pid, R.id.informatie_kind, R.id.informatie_leraar, R.id.kerndoel });
 						// updating listview
 						setListAdapter(adapter);
 					}
 
-
-					//					else
-					//					{
-					//
-					//						adapter = new SimpleAdapter(
-					//								getActivity(), itemsList,
-					//								/* AANPASSEN VOOR LISTVIEW */							R.layout.list_item, new String[] { TAG_PID, TAG_LEERLIJN
-					//									/*TAG_PID, TAG_LEERLIJN, TAG_VAK, TAG_ONDERDEEL, TAG_KERNDOEL, TAG_GROEP, TAG_INFORMATIE_KIND, TAG_INFORMATIE_LERAAR*/
-					//								},
-					//								new int[] { R.id.pid, R.id.leerlijn/*, R.id.vak, R.id.onderdeel, R.id.kerndoel, R.id.groep, R.id.informatie_kind, R.id.informatie_leraar */ /* MOETEN ER HIER NOG MEER ID'S?? */ });
-					//						Log.d("else statement list adapter, itemClicked", "" + itemClicked);
-					//						Log.d("else statement list adapter, leerlijn", "" + leerlijn);
-					//						// updating listview
-					//						setListAdapter(adapter);
-					//					}
 					Log.d("itemsList", itemsList.toString());
 				}
 			});
@@ -569,5 +672,15 @@ public class FragmentBrowsen extends ListFragment {
 		// Show response on activity
 		//       content.setText( text  );
 
+	}
+	
+	public void getFavoriet()
+	{
+		
+	}
+	
+	public void setFavoriet()
+	{
+		
 	}
 }

@@ -13,7 +13,8 @@
         android:visibility="gone" />
 
 
-    <!-- Name Label -->
+    
+    
     <TextView
         android:id="@+id/informatie_kind"
         android:layout_width="fill_parent"
@@ -62,7 +63,8 @@
         android:padding="10dip"
         android:textSize="17dip"
         android:textStyle="bold" />
- -->   
+ -->
+   
     <TextView 
         android:id="@+id/informatie_leraar"
         android:layout_width="fill_parent"

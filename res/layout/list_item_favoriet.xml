@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:onClick="" ><!--  android:orientation was vertical -->
+
+    <!-- Product id (fid) - will be HIDDEN - used to pass to other activity -->
+    <TextView
+        android:id="@+id/fid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/fav_naam"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textSize="15dip"
+        android:textStyle="bold" />
+      
+</LinearLayout>

@@ -9,13 +9,13 @@ package com.android.lijninleren;
 
 public final class R {
     public static final class array {
-        public static final int fragment_array=0x7f070001;
-        public static final int menu_array=0x7f070000;
+        public static final int fragment_array=0x7f080001;
+        public static final int menu_array=0x7f080000;
     }
     public static final class attr {
     }
     public static final class color {
-        public static final int white=0x7f060000;
+        public static final int white=0x7f070000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -24,27 +24,31 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int ab_background=0x7f020000;
-        public static final int ic_drawer=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
+        public static final int ic_action_search=0x7f020001;
+        public static final int ic_drawer=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int splash_image_cropped=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000b;
-        public static final int drawer=0x7f0a0002;
-        public static final int drawer_layout=0x7f0a0000;
-        public static final int imgLogo=0x7f0a0005;
-        public static final int informatie_kind=0x7f0a0008;
-        public static final int informatie_leraar=0x7f0a0009;
-        public static final int kerndoel=0x7f0a000a;
-        public static final int leerlijn=0x7f0a0007;
-        public static final int main=0x7f0a0001;
-        public static final int pid=0x7f0a0006;
-        public static final int progressBar1=0x7f0a0004;
-        public static final int textView1=0x7f0a0003;
+        public static final int drawer=0x7f0b0002;
+        public static final int drawer_layout=0x7f0b0000;
+        public static final int fav_naam=0x7f0b000a;
+        public static final int favorietButton=0x7f0b0006;
+        public static final int fid=0x7f0b0009;
+        public static final int imgLogo=0x7f0b0004;
+        public static final int informatie_kind=0x7f0b000b;
+        public static final int informatie_leraar=0x7f0b000c;
+        public static final int kerndoel=0x7f0b000d;
+        public static final int leerlijn=0x7f0b0008;
+        public static final int main=0x7f0b0001;
+        public static final int pid=0x7f0b0007;
+        public static final int progressBar1=0x7f0b0005;
+        public static final int textView1=0x7f0b0003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -54,17 +58,19 @@ public final class R {
         public static final int fragment_instellingen=0x7f030004;
         public static final int fragment_zoeken=0x7f030005;
         public static final int list_item=0x7f030006;
-        public static final int list_item_informatie=0x7f030007;
+        public static final int list_item_favoriet=0x7f030007;
+        public static final int list_item_informatie=0x7f030008;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
+        public static final int main=0x7f0a0000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int drawer_close=0x7f050004;
-        public static final int drawer_open=0x7f050003;
-        public static final int hello_world=0x7f050002;
+        public static final int app_name=0x7f060000;
+        public static final int drawer_close=0x7f060004;
+        public static final int drawer_open=0x7f060003;
+        public static final int hello_world=0x7f060002;
+        public static final int search_hint=0x7f060005;
+        public static final int search_title=0x7f060001;
     }
     public static final class style {
         /** 
@@ -88,13 +94,16 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f090001;
         /**  ActionBar styles 
          */
-        public static final int MyActionBar=0x7f080002;
-        public static final int MyActionBar_TitleTextStyle=0x7f080003;
+        public static final int MyActionBar=0x7f090002;
+        public static final int MyActionBar_TitleTextStyle=0x7f090003;
+    }
+    public static final class xml {
+        public static final int searchable=0x7f040000;
     }
 }

@@ -15,25 +15,21 @@
         android:textColor="#454545"
         android:textSize="12sp" />
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp"
-        android:indeterminate="false" />
-
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cropToPadding="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splash_image_cropped" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleSmallTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
-        android:maxHeight="10dp"
-        android:maxWidth="10dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_centerVertical="true"
+        android:indeterminate="false" />
 
 </RelativeLayout>
