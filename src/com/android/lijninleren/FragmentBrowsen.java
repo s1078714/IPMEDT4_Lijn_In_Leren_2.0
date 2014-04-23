@@ -282,11 +282,11 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d("WhereVak TESTTT", WhereVak);
 					if (WhereVak.contains("Klik hier om verder te gaan"))
 					{
-						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
 					}
 					else
 					{
-						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
 						getActivity().getActionBar().setTitle(leerlijn + ", " + WhereVak);
 					}
 										
@@ -306,12 +306,12 @@ public class FragmentBrowsen extends ListFragment {
 					WhereOnderdeel = itemClicked;
 					if (WhereVak.contains("Klik hier om verder te gaan"))
 					{
-						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
 						getActivity().getActionBar().setTitle(leerlijn + ", " + WhereOnderdeel);
 					}
 					else
 					{
-						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
 						getActivity().getActionBar().setTitle(leerlijn + ", " + WhereVak + ", " + WhereOnderdeel);
 					}
 					new LoadAllItems().execute();
@@ -328,12 +328,12 @@ public class FragmentBrowsen extends ListFragment {
 					WhereGroep = itemClicked;
 					if (WhereVak.contains("Klik hier om verder te gaan"))
 					{
-						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
 						getActivity().getActionBar().setTitle("..." + WhereOnderdeel + ", " + groep);
 					}
 					else
 					{
-						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
 						getActivity().getActionBar().setTitle("..." + WhereVak + ", " + WhereOnderdeel + ", " + groep);
 					}
 					new LoadAllItems().execute();
