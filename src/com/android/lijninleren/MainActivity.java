@@ -16,7 +16,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
-	static String url = "http://lijninleren.hostoi.com:80/";
+	static String url = "http://lijninleren.hostoi.com:80/www/android_connect/";
 	
 	CheckBox checkBoxFav;
 

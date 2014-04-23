@@ -94,7 +94,7 @@ public class FragmentBrowsen extends ListFragment {
 	String informatie_leraar;
 
 	// url to get all products list
-	private static String url_all_products = MainActivity.url + "www/android_connect/get_all_items.php?table=" + TAG_PRODUCTS;
+	private static String url_all_items = MainActivity.url + "get_all_items.php?table=" + TAG_PRODUCTS;
 
 	// products JSONArray
 	JSONArray products = null;
@@ -422,14 +422,14 @@ public class FragmentBrowsen extends ListFragment {
 				StringBuilder sb;
 				BufferedReader reader=null;
 				Log.d("Data: ", data);
-				Log.d("url_all_products = ", url_all_products);
+				Log.d("url_all_products = ", url_all_items);
 
 				// Send data 
 				try
 				{ 
 
 					// Defined URL  where to send data
-					URL url = new URL(url_all_products + "&" + data);
+					URL url = new URL(url_all_items + "&" + data);
 					Log.d("URL = ", url.toString() );
 
 					// Send POST data request

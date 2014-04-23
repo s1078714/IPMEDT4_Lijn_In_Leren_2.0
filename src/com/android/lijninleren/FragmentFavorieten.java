@@ -88,7 +88,7 @@ public class FragmentFavorieten extends ListFragment {
 	String informatie_leraar;
 
 	// url to get all products list
-	private static String url_all_products = MainActivity.url + "www/android_connect/get_all_items.php?table=" + TAG_PRODUCTS;
+	private static String url_all_items = MainActivity.url + "get_all_items.php?table=" + TAG_PRODUCTS;
 
 	// products JSONArray
 	JSONArray products = null;
