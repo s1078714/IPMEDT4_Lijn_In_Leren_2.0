@@ -2,25 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
 
     <!--
          Main ListView 
 		 Always give id value as list(@android:id/list)
     -->
 
-    <Button
-        android:id="@+id/favorietButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Favoriet" />
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp" />
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:scrollbars="none" />
+    
     <!-- Favoriet -->
+    <ImageButton
+        android:id="@+id/favorietButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@null"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/ic_action_important" />
 
 </LinearLayout>

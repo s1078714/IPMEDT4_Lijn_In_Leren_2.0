@@ -29,25 +29,27 @@ public final class R {
     }
     public static final class drawable {
         public static final int ab_background=0x7f020000;
-        public static final int ic_action_search=0x7f020001;
-        public static final int ic_drawer=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int splash_image_cropped=0x7f020004;
+        public static final int ic_action_important=0x7f020001;
+        public static final int ic_action_remove=0x7f020002;
+        public static final int ic_action_search=0x7f020003;
+        public static final int ic_drawer=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int splash_image_cropped=0x7f020006;
     }
     public static final class id {
+        public static final int bDelete=0x7f0b000a;
         public static final int drawer=0x7f0b0002;
         public static final int drawer_layout=0x7f0b0000;
-        public static final int fav_naam=0x7f0b000a;
-        public static final int favorietButton=0x7f0b0006;
-        public static final int fid=0x7f0b0009;
+        public static final int fav_naam=0x7f0b0009;
+        public static final int favorietButton=0x7f0b0005;
+        public static final int fid=0x7f0b0008;
         public static final int imgLogo=0x7f0b0004;
         public static final int informatie_kind=0x7f0b000b;
         public static final int informatie_leraar=0x7f0b000c;
         public static final int kerndoel=0x7f0b000d;
-        public static final int leerlijn=0x7f0b0008;
+        public static final int leerlijn=0x7f0b0007;
         public static final int main=0x7f0b0001;
-        public static final int pid=0x7f0b0007;
-        public static final int progressBar1=0x7f0b0005;
+        public static final int pid=0x7f0b0006;
         public static final int textView1=0x7f0b0003;
     }
     public static final class layout {

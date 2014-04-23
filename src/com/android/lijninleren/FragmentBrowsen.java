@@ -19,7 +19,6 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -29,7 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -104,9 +103,6 @@ public class FragmentBrowsen extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_browsen, null);
 		
-		// Favorieten inladen
-//		favorieten = getActivity().getPreferences( 0 );
-
 		return root;
 
 	}
@@ -149,6 +145,7 @@ public class FragmentBrowsen extends ListFragment {
 		
 		// Get listview
 		ListView lv = getListView();
+		Log.d("lvBrowse", lv.toString());
 		
 		lv.setOnKeyListener( new View.OnKeyListener()
 		{
@@ -172,7 +169,7 @@ public class FragmentBrowsen extends ListFragment {
 		});
 		
 
-		final Button buttonFav = (Button) getView().findViewById(R.id.favorietButton);
+		final ImageButton buttonFav = (ImageButton) getView().findViewById(R.id.favorietButton);
 		buttonFav.setVisibility( View.GONE );
 		Log.d("buttonFav", "Visibility View.GONE" );
 		
@@ -268,6 +265,7 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d( "Where", Where );
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereLeerlijn = itemClicked;
+					getActivity().getActionBar().setTitle(leerlijn);
 					//					vak = itemClicked;
 					new LoadAllItems().execute();
 				}
@@ -281,6 +279,17 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d( "Where", Where );
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereVak = itemClicked;
+					Log.d("WhereVak TESTTT", WhereVak);
+					if (WhereVak.contains("Klik hier om verder te gaan"))
+					{
+						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
+					}
+					else
+					{
+						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
+						getActivity().getActionBar().setTitle(leerlijn + ", " + WhereVak);
+					}
+										
 					//					onderdeel = itemClicked;
 					new LoadAllItems().execute();
 
@@ -295,6 +304,16 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d( "Where", Where );
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereOnderdeel = itemClicked;
+					if (WhereVak.contains("Klik hier om verder te gaan"))
+					{
+						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
+						getActivity().getActionBar().setTitle(leerlijn + ", " + WhereOnderdeel);
+					}
+					else
+					{
+						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
+						getActivity().getActionBar().setTitle(leerlijn + ", " + WhereVak + ", " + WhereOnderdeel);
+					}
 					new LoadAllItems().execute();
 				}
 
@@ -307,6 +326,16 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d( "Where", Where );
 					Log.d( "itemClicked (doInBackground)", "" + itemClicked );
 					WhereGroep = itemClicked;
+					if (WhereVak.contains("Klik hier om verder te gaan"))
+					{
+						Toast.makeText(getActivity().getBaseContext(), "Gelijk!", Toast.LENGTH_LONG).show();
+						getActivity().getActionBar().setTitle("..." + WhereOnderdeel + ", " + groep);
+					}
+					else
+					{
+						Toast.makeText(getActivity().getBaseContext(), "Ongelijk!", Toast.LENGTH_LONG).show();
+						getActivity().getActionBar().setTitle("..." + WhereVak + ", " + WhereOnderdeel + ", " + groep);
+					}
 					new LoadAllItems().execute();
 					if (TAG_INFORMATIE_KIND != "null")
 					{
