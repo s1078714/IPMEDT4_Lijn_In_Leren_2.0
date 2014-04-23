@@ -4,11 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal" >
 
-    <!--
-         Main ListView 
-		 Always give id value as list(@android:id/list)
-    -->
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"

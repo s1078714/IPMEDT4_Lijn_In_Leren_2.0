@@ -19,10 +19,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Database Name
     public static final String DATABASE_NAME = "favoritesManager";
  
-    // Contacts table name
+    // Favorites table name
     private static final String TABLE_FAVORITES = "favorites";
  
-    // Contacts Table Columns names
+    // Favorites Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_TITEL = "titel";
  
@@ -33,9 +33,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "("
+        String CREATE_FAVORITES_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "("
                 + KEY_ID + " TEXT PRIMARY KEY," + KEY_TITEL + " TEXT);";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+        db.execSQL(CREATE_FAVORITES_TABLE);
     }
  
     // Upgrading database
@@ -48,15 +48,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
     
-    // Adding new contact
+    // Adding new favorite
     void addFavoriet(Favoriet favoriet) {
     	SQLiteDatabase db = this.getWritableDatabase();
 
     	ContentValues values = new ContentValues();
 
-    	String FAV_CHECKER = "SELECT * FROM " + TABLE_FAVORITES + " WHERE " + KEY_ID + " = " + favoriet.getID().toString() + ";";
-    	Cursor cursor = db.rawQuery(FAV_CHECKER, null);
-//    	Log.d("database query addContact", cursor.toString() );
     	Log.d("Favoriet", "toevoegen");
     	values.put(KEY_ID, favoriet.getID()); // Favoriet id
     	values.put(KEY_TITEL, favoriet.getTitel()); // Favoriet titel/naam
@@ -76,7 +73,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     
     
 
- // Getting All Contacts
+ // Getting All Favorieten
     public List<Favoriet> getAllFavorites() {
         List<Favoriet> favoriteList = new ArrayList<Favoriet>();
         // Select All Query

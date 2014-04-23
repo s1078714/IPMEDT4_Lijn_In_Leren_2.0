@@ -350,10 +350,6 @@ public class FragmentBrowsen extends ListFragment {
 					Log.d("Geklikt op", informatie_kind);
 					Log.d("== statement", "GESTART");
 				}
-//				if (itemClicked == TAG_INFORMATIE_KIND)
-//				{
-//					Toast.makeText(getActivity().getBaseContext(), "U klikte op informatie", Toast.LENGTH_LONG).show();
-//				}
 
 				Log.d("Query", "SELECT " + Select + " FROM " + TAG_PRODUCTS + " " + Where + " GROUP BY " + GroupBy);
 
@@ -377,33 +373,6 @@ public class FragmentBrowsen extends ListFragment {
 		
 	}
 	
-//	private void loadSavedPreferences() {
-//		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		boolean checkBoxValue = sharedPreferences.getBoolean("CheckBox_Value", false);
-//		String name = sharedPreferences.getString("storedName", "YourName");
-//		if (checkBoxValue) {
-//			checkBoxFav.setChecked(true);
-//		} else {
-//			checkBoxFav.setChecked(false);
-//		}
-//		editText.setText(name);
-//	}
-//	private void savePreferences(String key, boolean value) {
-//		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		Editor editor = sharedPreferences.edit();
-//		editor.putBoolean(key, value);
-//		editor.commit();
-//	}
-//	private void savePreferences(String key, String value) {
-//		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		Editor editor = sharedPreferences.edit();
-//		editor.putString(key, value);
-//		editor.commit();
-//	}
-	
-	
-
-
 	/**
 	 * Background Async Task to Load all product by making HTTP Request
 	 * */
@@ -434,15 +403,10 @@ public class FragmentBrowsen extends ListFragment {
 
 				Log.d("GetText()", "GESTART!");
 				// Get user defined values
-				//				Select  = "leerlijn";
 				if ( itemClicked != groep )
 				{
 					GroupBy = Select;
 				}
-				//				Where  = "leerlijn";
-				//				Where2  = "="; // pass.getText().toString()
-				//				Where3  = "leerlijn"; // pass.getText().toString()
-
 				// Create data variable for sent values to server  
 
 				data = URLEncoder.encode("select", "UTF-8") 
@@ -453,12 +417,6 @@ public class FragmentBrowsen extends ListFragment {
 
 				data += "&" + URLEncoder.encode("where", "UTF-8") 
 						+ "=" + URLEncoder.encode(Where, "UTF-8");
-
-				//				data += "&" + URLEncoder.encode("where2", "UTF-8") 
-				//						+ "=" + URLEncoder.encode(Where2, "UTF-8");
-
-				//				data += "&" + URLEncoder.encode("where3", "UTF-8") 
-				//						+ "=" + URLEncoder.encode(Where3, "UTF-8");
 
 				String text = "";
 				StringBuilder sb;
@@ -514,7 +472,7 @@ public class FragmentBrowsen extends ListFragment {
 					catch(Exception ex) {}
 				}
 				// getting JSON string from URL
-				JSONObject json = new JSONObject(text); /*jParser.makeHttpRequest(url_all_products, "GET", params);*/
+				JSONObject json = new JSONObject(text);
 				// Check your log cat for JSON reponse
 				Log.d("Alle gegevens: ", json.toString());
 				Log.d("params = ", params.toString());
@@ -547,9 +505,6 @@ public class FragmentBrowsen extends ListFragment {
 							informatie_leraar = c.getString(TAG_INFORMATIE_LERAAR);
 
 							Log.d("For-loop", "getStrings zijn uitgevoerd! Loop i = " + i);
-
-							//	databaseHelper.saveCategoryRecord(id,leerlijn,vak,onderdeel,kerndoel,groep,informatie_kind,informatie_leraar);
-
 
 							// creating new HashMap
 							HashMap<String, String> map = new HashMap<String, String>();
@@ -696,7 +651,6 @@ public class FragmentBrowsen extends ListFragment {
 	//Create GetText Metod
 	public  void  GetText()  throws  UnsupportedEncodingException
 	{
-
 
 		// Show response on activity
 		//       content.setText( text  );

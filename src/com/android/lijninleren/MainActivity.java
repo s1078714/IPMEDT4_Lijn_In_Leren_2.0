@@ -1,17 +1,12 @@
 package com.android.lijninleren;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -79,11 +74,11 @@ public class MainActivity extends FragmentActivity {
 		getActionBar().setDisplayShowHomeEnabled(false);
 
 		mDrawerToggle = new ActionBarDrawerToggle(
-				this,                  /* host Activity */
-				drawer,         /* DrawerLayout object */
-				R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-				R.string.drawer_open,  /* "open drawer" description for accessibility */
-				R.string.drawer_close  /* "close drawer" description for accessibility */
+				this,                  	/* host Activity */
+				drawer,         		/* DrawerLayout object */
+				R.drawable.ic_drawer,  	/* nav drawer image to replace 'Up' caret */
+				R.string.drawer_open,  	/* "open drawer" description for accessibility */
+				R.string.drawer_close  	/* "close drawer" description for accessibility */
 				) {
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
@@ -106,19 +101,6 @@ public class MainActivity extends FragmentActivity {
 
 		
 	}
-
-	//	@Override
-	//	public boolean onCreateOptionsMenu(Menu menu) {
-	//	    MenuInflater inflater = getMenuInflater();
-	//	    inflater.inflate(R.menu.main, menu);
-	//	    
-	//	    return true;
-	//	}
-
-	
-
-
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

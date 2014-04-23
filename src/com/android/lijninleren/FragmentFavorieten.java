@@ -43,8 +43,6 @@ public class FragmentFavorieten extends ListFragment {
 		return f;
 	}
 
-
-
 	// Progress Dialog
 	private ProgressDialog pDialog;
 
@@ -109,12 +107,6 @@ public class FragmentFavorieten extends ListFragment {
 		return root;
 	}
 	
-
-	//  //laad de preferences binnen
-	//	SharedPreferences favorieten = this.getPreferences(MODE_PRIVATE);
-	//	this.item = favorieten.getString( "Geen naam ingevoerd", naam ) ;
-	//	this.id = favorieten.getInt( "" , 0);
-
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{

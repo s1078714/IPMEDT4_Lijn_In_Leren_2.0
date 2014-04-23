@@ -12,9 +12,6 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
-
-    
-    
     <TextView
         android:id="@+id/informatie_kind"
         android:layout_width="fill_parent"
@@ -23,48 +20,7 @@
         android:textSize="15dip"
         android:textStyle="normal"
         android:clickable="false" />
-   <!--  
-    <TextView 
-        android:id="@+id/vak"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="17dip"
-        android:textStyle="bold" />
-    
-    <TextView 
-        android:id="@+id/onderdeel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="17dip"
-        android:textStyle="bold" />
-    
-    <TextView 
-        android:id="@+id/kerndoel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="17dip"
-        android:textStyle="bold" />
-    
-    <TextView 
-        android:id="@+id/groep"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="17dip"
-        android:textStyle="bold" />
-    
-    <TextView 
-        android:id="@+id/informatie_kind"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="17dip"
-        android:textStyle="bold" />
- -->
-   
+      
     <TextView 
         android:id="@+id/informatie_leraar"
         android:layout_width="fill_parent"
@@ -75,8 +31,7 @@
         android:paddingTop="35dip"
         android:textSize="15dip"
         android:textStyle="normal"
-        android:clickable="false"
-         />
+        android:clickable="false" />
     
     <TextView
         android:layout_width="fill_parent"
